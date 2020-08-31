@@ -1,0 +1,67 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Segoe UI, sans-serif;
+    color: #FFDF00;
+    background-color: black
+}
+
+header {
+    background-color: purple;
+    width: 100vw;
+    height: 10vw;
+    margin: 0;
+}
+
+header h1 {
+    margin: auto;
+    text-align: center;
+    margin: auto;
+    font-size: 6vw;
+}
+
+
+#heroImage {
+
+    width: 100vw;
+    height: 56.25vw;
+    background-image: url(images/petrograd%20panorama.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+
+#menu section {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 2vw;
+    justify-items: center;
+
+}
+
+.dishCard {
+    background-color: purple;
+    width: auto;
+    height: auto;
+    margin: 1vw;
+    padding: 1vw;
+    border-radius: 0.5vw;
+
+}
+
+
+#menu > p {
+    text-align: center;
+    color: purple;
+    font-size: 4vw;
+}
+
+img {
+    margin: auto;
+    width: 100%;
+    height: auto;
+    border-radius: 0.5vw;
+
+}
