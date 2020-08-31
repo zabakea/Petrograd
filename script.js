@@ -18,6 +18,17 @@ function showProduct(singleDish) {
     //kloniranje template
     const templateClone = dishTemplate.cloneNode(true);
 
+    if (singleDish.vegetarian) {
+        templateClone.querySelector(".vegetarian").classList.remove("hidden");
+    }
+    if (singleDish.alcohol) {
+        templateClone.querySelector(".alcohol").classList.remove("hidden");
+    }
+    if (singleDish.soldout) {
+        templateClone.querySelector(".soldout").classList.remove("hidden");
+    }
+
+
     //fill ou template
     templateClone.querySelector(".dishName").textContent = singleDish.name;
     templateClone.querySelector(".dishPrice").textContent = singleDish.price;
@@ -27,4 +38,15 @@ function showProduct(singleDish) {
     //append
     const parentElement = document.querySelector("#starter");
     parentElement.appendChild(templateClone)
+}
+
+const vegFilter = document.querySelector("#vegFilter");
+vegFilter.addEventListener("click", vegFilterClicked);
+
+function vegFilterClicked() {
+    const someArticles = document.querySelectorAll("article:not(.vegeterian)");
+    console.log(someArticles)
+/*    someArticles.forEach(elem=>{
+        elem.classList.toggle("hidden")*/
+    })
 }
