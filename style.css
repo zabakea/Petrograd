@@ -52,7 +52,7 @@ header h1 {
 }
 
 
-#menu > p {
+#menu > h2 {
     text-align: center;
     color: purple;
     font-size: 4vw;

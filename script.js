@@ -1,15 +1,30 @@
-// 1. odabir templatea
-const dishTemplate = document.querySelector("#dishTemplate").content;
+fetch("https://kea-alt-del.dk/t5/api/productlist")
+    .then(function (response) {
+        console.log(response)
+        return response.json();
+    })
+    .then(function (data) {
+        dataReceived(data);
+    })
 
-// 2. izrada klona
+function dataReceived(products) {
+    products.forEach(showProduct)
+}
 
-const dishClone = dishTemplate.cloneNode(true);
+function showProduct(singleDish) {
+    //getting template
+    const dishTemplate = document.querySelector("#dishTemplate").content;
 
-// 3. Promjena sadrzaja klona (opcionalno)
-dishClone.querySelector("h1").textContent = "Russian Ringbread"
+    //kloniranje template
+    const templateClone = dishTemplate.cloneNode(true);
 
-// 4. Odabir novog parent elementa
-const parentElement = document.querySelector("#menu");
+    //fill ou template
+    templateClone.querySelector(".dishName").textContent = singleDish.name;
+    templateClone.querySelector(".dishPrice").textContent = singleDish.price;
+    templateClone.querySelector(".shortDescription").textContent = singleDish.shortdescription;
 
-// 5. Append ili dodjeli clone novome parent elementu
-parentElement.appendChild(dishClone);
+
+    //append
+    const parentElement = document.querySelector("#starter");
+    parentElement.appendChild(templateClone)
+}
