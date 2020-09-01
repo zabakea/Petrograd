@@ -1,3 +1,46 @@
+init();
+
+function init() {
+    fetch("https://kea-alt-del.dk/t5/api/categories")
+        .then(function (res) {
+            return res.json();
+        })
+        .then(function (data) {
+            categoriesReceived(data);
+        })
+}
+
+function categoriesReceived(cats) {
+    createNavigation(cats);
+    createSections(cats);
+    fetchProducts();
+}
+
+function createSections(categories) {
+    categories.forEach(category => {
+        const section = document.createElement("section");
+        section.setAttribute("id", category);
+        const h2 = document.createElement("h2");
+        h2.textContent = category;
+        document.querySelector("#menu").appendChild(section);
+        section.appendChild(h2);
+
+    })
+}
+
+function createNavigation(categories) {
+
+    categories.forEach(cat => {
+        const a = document.createElement("a");
+        a.textContent = cat;
+        a.setAttribute("href",`#${cat}`)
+        document.querySelector("nav").appendChild(a);
+    })
+}
+
+
+function fetchProducts() {
+
 fetch("https://kea-alt-del.dk/t5/api/productlist")
     .then(function (response) {
         console.log(response)
@@ -36,17 +79,8 @@ function showProduct(singleDish) {
 
 
     //append
-    const parentElement = document.querySelector("#starter");
+    const parentElement = document.querySelector("#" + singleDish.category);
     parentElement.appendChild(templateClone)
 }
 
-const vegFilter = document.querySelector("#vegFilter");
-vegFilter.addEventListener("click", vegFilterClicked);
-
-function vegFilterClicked() {
-    const someArticles = document.querySelectorAll("article:not(.vegeterian)");
-    console.log(someArticles)
-/*    someArticles.forEach(elem=>{
-        elem.classList.toggle("hidden")*/
-    })
 }
