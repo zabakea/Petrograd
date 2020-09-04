@@ -71,11 +71,26 @@ function showProduct(singleDish) {
         templateClone.querySelector(".soldout").classList.remove("hidden");
     }
 
-
+    templateClone.querySelector('article').id="dish_"+singleDish.id
     //fill ou template
     templateClone.querySelector(".dishName").textContent = singleDish.name;
     templateClone.querySelector(".dishPrice").textContent = singleDish.price;
     templateClone.querySelector(".shortDescription").textContent = singleDish.shortdescription;
+
+       templateClone.querySelector(".readMore").addEventListener("click", () => {
+        fetch(`https://kea-alt-del.dk/t5/api/product?id=` + singleDish.id)
+            .then(res => res.json())
+            .then(function (descript) {
+                  showMore(descript);
+                  })
+
+    })
+
+       function showMore(data) {
+        document.querySelector(`#dish_${data.id} .longDescription`).textContent = data.longdescription;
+        document.querySelector(`#dish_${data.id} .longDescription`).classList.remove("hidden");
+        document.querySelector(`#dish_${data.id} .shortDescription`).classList.add("hidden");
+    }
 
 
     //append
