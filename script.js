@@ -81,6 +81,11 @@ function showProduct(singleDish) {
         article.classList.add("hasAlcohol");
     }
 
+
+
+
+
+
     //fill ou template
     templateClone.querySelector(".dishName").textContent = singleDish.name;
     templateClone.querySelector(".dishPrice").textContent = singleDish.price;
@@ -94,6 +99,19 @@ function showProduct(singleDish) {
                   })
 
     })
+
+        //discount price
+
+   const price = singleDish.price;
+    const discount = singleDish.discount;
+    const newPrice = price - discount;
+
+    if(singleDish.discount >0) {
+    templateClone.querySelector(".newPrice").textContent = newPrice;
+    templateClone.querySelector(".dishPrice").classList.add("strikethrough");
+        } else {
+            templateClone.querySelector(".newPrice").classList.add("hidden");
+        }
 
        function showMore(data) {
         document.querySelector(`#dish_${data.id} .longDescription`).textContent = data.longdescription;

@@ -86,3 +86,7 @@ nav {
     justify-content: space-around;
     font-size: 1vw;
 }
+.strikethrough {
+    text-decoration: line-through;
+    color: red;
+}
