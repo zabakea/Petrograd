@@ -64,17 +64,13 @@ img {
     width: 100%;
     height: auto;
     border-radius: 0.5vw;
-
 }
+.vegetarian {display: inline-block}
+.alcohol {display: inline-block}
+.lactose {display: inline-block}
+.nuts {display: inline-block}
 
-.allergens {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 2vw;
-    grid-gap: 1vw;
 
-}
 .hidden {
     display: none;
 }

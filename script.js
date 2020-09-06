@@ -72,6 +72,12 @@ function showProduct(singleDish) {
     }
 
     templateClone.querySelector('article').id="dish_"+singleDish.id
+
+    const article = templateClone.querySelector('article');
+    if (singleDish.vegetarian) {
+        article.classList.add("itisVegetarian");
+    }
+
     //fill ou template
     templateClone.querySelector(".dishName").textContent = singleDish.name;
     templateClone.querySelector(".dishPrice").textContent = singleDish.price;
@@ -98,4 +104,15 @@ function showProduct(singleDish) {
     parentElement.appendChild(templateClone)
 }
 
+}
+
+const vegFilter = document.querySelector("#vegFilter");
+vegFilter.addEventListener("click", vegFilterClicked);
+
+function vegFilterClicked() {
+    const articles = document.querySelectorAll("article:not(.itisVegetarian)");
+
+      articles.forEach(elem=>{
+        elem.classList.toggle("hidden");
+    })
 }
