@@ -33,7 +33,7 @@ function createNavigation(categories) {
     categories.forEach(cat => {
         const a = document.createElement("a");
         a.textContent = cat;
-        a.setAttribute("href",`#${cat}`)
+        a.setAttribute("href", `#${cat}`)
         document.querySelector("nav").appendChild(a);
     })
 }
@@ -41,89 +41,93 @@ function createNavigation(categories) {
 
 function fetchProducts() {
 
-fetch("https://kea-alt-del.dk/t5/api/productlist")
-    .then(function (response) {
-        console.log(response)
-        return response.json();
-    })
-    .then(function (data) {
-        dataReceived(data);
-    })
 
-function dataReceived(products) {
-    products.forEach(showProduct)
-}
+    //fetching JSON file
+    fetch("https://kea-alt-del.dk/t5/api/productlist")
+        .then(function (response) {
+            console.log(response)
+            return response.json();
+        })
+        .then(function (data) {
+            dataReceived(data);
+        })
 
-function showProduct(singleDish) {
-    //getting template
-    const dishTemplate = document.querySelector("#dishTemplate").content;
+    //Passing data to a function & forEach (loop) every product
 
-    //kloniranje template
-    const templateClone = dishTemplate.cloneNode(true);
-
-    if (singleDish.vegetarian) {
-        templateClone.querySelector(".vegetarian").classList.remove("hidden");
-    }
-    if (singleDish.alcohol) {
-        templateClone.querySelector(".alcohol").classList.remove("hidden");
-    }
-    if (singleDish.soldout) {
-        templateClone.querySelector(".soldout").classList.remove("hidden");
+    function dataReceived(products) {
+        products.forEach(showProduct)
     }
 
-    templateClone.querySelector('article').id="dish_"+singleDish.id
+    function showProduct(singleDish) {
+        //getting template
+        const dishTemplate = document.querySelector("#dishTemplate").content;
 
-    const article = templateClone.querySelector('article');
-    if (singleDish.vegetarian) {
-        article.classList.add("itisVegetarian");
-    }
-    if (singleDish.alcohol) {
-        article.classList.add("hasAlcohol");
-    }
+        //kloniranje template
+        const templateClone = dishTemplate.cloneNode(true);
 
 
+        const article = templateClone.querySelector('article');
+        if (singleDish.vegetarian) {
+            article.classList.add("itisVegetarian");
+        }
+        if (singleDish.alcohol) {
+            article.classList.add("hasAlcohol");
+        }
 
+        //fill out template
+        templateClone.querySelector(".dishName").textContent = singleDish.name;
+        templateClone.querySelector(".dishPrice").textContent = singleDish.price;
+        templateClone.querySelector(".shortDescription").textContent = singleDish.shortdescription;
 
+        templateClone.querySelector(".readMore").addEventListener("click", () => {
+            fetch(`https://kea-alt-del.dk/t5/api/product?id=` + singleDish.id)
+                .then(res => res.json())
+                .then(function (descript) {
+                    showMore(descript);
+                })
 
+        })
 
-    //fill ou template
-    templateClone.querySelector(".dishName").textContent = singleDish.name;
-    templateClone.querySelector(".dishPrice").textContent = singleDish.price;
-    templateClone.querySelector(".shortDescription").textContent = singleDish.shortdescription;
+        //filling template with allergens & soldout
 
-       templateClone.querySelector(".readMore").addEventListener("click", () => {
-        fetch(`https://kea-alt-del.dk/t5/api/product?id=` + singleDish.id)
-            .then(res => res.json())
-            .then(function (descript) {
-                  showMore(descript);
-                  })
-
-    })
+        if (singleDish.vegetarian) {
+            templateClone.querySelector(".vegetarian").classList.remove("hidden");
+        }
+        if (singleDish.alcohol) {
+            templateClone.querySelector(".alcohol").classList.remove("hidden");
+        }
+        if (singleDish.soldout) {
+            templateClone.querySelector(".soldout").classList.remove("hidden");
+        }
 
         //discount price
 
-   const price = singleDish.price;
-    const discount = singleDish.discount;
-    const newPrice = price - discount;
+        const price = singleDish.price;
+        const discount = singleDish.discount;
+        const newPrice = price - discount;
 
-    if(singleDish.discount >0) {
-    templateClone.querySelector(".newPrice").textContent = newPrice;
-    templateClone.querySelector(".dishPrice").classList.add("strikethrough");
+        if (singleDish.discount > 0) {
+            templateClone.querySelector(".newPrice").textContent = newPrice;
+            templateClone.querySelector(".dishPrice").classList.add("strikethrough");
         } else {
             templateClone.querySelector(".newPrice").classList.add("hidden");
         }
 
-       function showMore(data) {
-        document.querySelector(`#dish_${data.id} .longDescription`).textContent = data.longdescription;
-        document.querySelector(`#dish_${data.id} .longDescription`).classList.remove("hidden");
-        document.querySelector(`#dish_${data.id} .shortDescription`).classList.add("hidden");
+        //Toggle short & long description - interpolation of class name(id)
+
+        templateClone.querySelector('article').id = "dish_" + singleDish.id
+
+        function showMore(data) {
+            document.querySelector(`#dish_${data.id} .longDescription`).textContent = data.longdescription;
+            document.querySelector(`#dish_${data.id} .longDescription`).classList.toggle("hidden");
+            document.querySelector(`#dish_${data.id} .shortDescription`).classList.toggle("hidden");
+        }
+
+
+        //append
+        const parentElement = document.querySelector("#" + singleDish.category);
+        parentElement.appendChild(templateClone)
     }
-
-
-    //append
-    const parentElement = document.querySelector("#" + singleDish.category);
-    parentElement.appendChild(templateClone)
-}
 
 }
 
@@ -136,7 +140,7 @@ alcFilter.addEventListener("click", alcFilterClicked);
 function vegFilterClicked() {
     const articles = document.querySelectorAll("article:not(.itisVegetarian)");
 
-      articles.forEach(elem=>{
+    articles.forEach(elem => {
         elem.classList.toggle("hidden");
     })
 }
@@ -144,7 +148,7 @@ function vegFilterClicked() {
 function alcFilterClicked() {
     const articles2 = document.querySelectorAll("article:not(.hasAlcohol)");
 
-      articles2.forEach(elem=>{
-        elem.classList.toggle("hidden");
+    articles2.forEach(elem => {
+        elem.classList.toggle("hide");
     })
 }
