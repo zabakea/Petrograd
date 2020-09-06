@@ -77,6 +77,9 @@ function showProduct(singleDish) {
     if (singleDish.vegetarian) {
         article.classList.add("itisVegetarian");
     }
+    if (singleDish.alcohol) {
+        article.classList.add("hasAlcohol");
+    }
 
     //fill ou template
     templateClone.querySelector(".dishName").textContent = singleDish.name;
@@ -109,10 +112,21 @@ function showProduct(singleDish) {
 const vegFilter = document.querySelector("#vegFilter");
 vegFilter.addEventListener("click", vegFilterClicked);
 
+const alcFilter = document.querySelector("#alcFilter");
+alcFilter.addEventListener("click", alcFilterClicked);
+
 function vegFilterClicked() {
     const articles = document.querySelectorAll("article:not(.itisVegetarian)");
 
       articles.forEach(elem=>{
+        elem.classList.toggle("hidden");
+    })
+}
+
+function alcFilterClicked() {
+    const articles2 = document.querySelectorAll("article:not(.hasAlcohol)");
+
+      articles2.forEach(elem=>{
         elem.classList.toggle("hidden");
     })
 }
