@@ -1,11 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kite+One&display=swap');
+
 * {
     box-sizing: border-box;
 }
 
 html {
-    font-family: Segoe UI, sans-serif;
-    color: #FFDF00;
-    background-color: black
+    font-family: 'Kite One', sans-serif;
+    color: #E6CE20;
+    background-color: #E6CE20;
+
+}
+
+body {
+    margin: 0;
 }
 
 header {
@@ -19,7 +27,8 @@ header h1 {
     margin: auto;
     text-align: center;
     margin: auto;
-    font-size: 6vw;
+    font-size: 4vw;
+    font-family: 'Lobster', cursive;
 }
 
 
@@ -65,10 +74,22 @@ img {
     height: auto;
     border-radius: 0.5vw;
 }
-.vegetarian {display: inline-block}
-.alcohol {display: inline-block}
-.lactose {display: inline-block}
-.nuts {display: inline-block}
+
+.vegetarian {
+    display: inline-block
+}
+
+.alcohol {
+    display: inline-block
+}
+
+.lactose {
+    display: inline-block
+}
+
+.nuts {
+    display: inline-block
+}
 
 
 .hidden {
@@ -78,6 +99,7 @@ img {
 .soldout {
     position: relative;
 }
+
 .soldout::after {
     content: "";
     background-image: url(images/sold-5250892_200.png);
@@ -96,11 +118,55 @@ nav {
     flex-direction: row;
     justify-content: space-around;
     font-size: 1vw;
+    align-items: flex-end;
+    margin-top: 1.7vw;
 }
+
 .strikethrough {
     text-decoration: line-through;
     color: red;
 }
+
 .hide {
     display: none;
+}
+
+nav a:link {
+    color: #E6CE20;
+    font-size: 2vw;
+    text-decoration: none;
+}
+
+nav a:visited {
+    color: #E6CE20;
+    font-size: 2vw;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #E6CE20;
+    font-size: 2vw;
+    text-decoration: none;
+}
+
+nav a:active {
+    color: #E6CE20;
+    font-size: 2vw;
+    text-decoration: none;
+}
+
+footer {
+    background-color: purple;
+    width: 100vw;
+    height: 4vw;
+    align-content: center;
+    justify-content: center;
+}
+summary {
+    color: purple;
+    margin-left: 1vw;
+}
+details {
+    margin-left: 1vw;
+
 }

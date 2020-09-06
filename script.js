@@ -117,6 +117,7 @@ function fetchProducts() {
             templateClone.querySelector(".newPrice").classList.add("hidden");
         }
 
+
         //Toggle short & long description - interpolation of class name(id)
 
         templateClone.querySelector('article').id = "dish_" + singleDish.id
@@ -125,8 +126,8 @@ function fetchProducts() {
             document.querySelector(`#dish_${data.id} .longDescription`).textContent = data.longdescription;
             document.querySelector(`#dish_${data.id} .longDescription`).classList.toggle("hidden");
             document.querySelector(`#dish_${data.id} .shortDescription`).classList.toggle("hidden");
-        }
 
+        }
 
         //append
         const parentElement = document.querySelector("#" + singleDish.category);
