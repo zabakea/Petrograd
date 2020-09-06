@@ -65,6 +65,10 @@ function fetchProducts() {
         //kloniranje template
         const templateClone = dishTemplate.cloneNode(true);
 
+        //grabbing images
+        const img = templateClone.querySelector("img");
+        img.setAttribute("src", `https://kea-alt-del.dk/t5/site/imgs/medium/${singleDish.image}-md.jpg`);
+
 
         const article = templateClone.querySelector('article');
         if (singleDish.vegetarian) {
@@ -97,7 +101,7 @@ function fetchProducts() {
             templateClone.querySelector(".alcohol").classList.remove("hidden");
         }
         if (singleDish.soldout) {
-            templateClone.querySelector(".soldout").classList.remove("hidden");
+            templateClone.querySelector(".dishImg").classList.add("soldout");
         }
 
         //discount price

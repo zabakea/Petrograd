@@ -76,8 +76,19 @@ img {
 }
 
 .soldout {
+    position: relative;
+}
+.soldout::after {
+    content: "";
+    background-image: url(images/sold-5250892_200.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
     width: 100%;
-
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
 }
 
 nav {
